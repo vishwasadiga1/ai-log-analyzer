@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis Results</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: white;
+        min-height: 100vh;
+      }
+
+      .card {
+        background-color: #ffffff;
+        border-radius: 15px;
+        border: none;
+      }
+
+      .alert-box {
+        background: #7f1d1d;
+        color: #fecaca;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .anomaly-box {
+        background: #e45050;
+        color: #f8f8f8;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .no-data {
+        color: #ffffff;
+      }
+
+      .btn-back {
+        background: #22c55e;
+        border: none;
+      }
+
+      .btn-back:hover {
+        background: #16a34a;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container py-5">
+      <div class="text-center mb-5">
+        <h1>📊 Analysis Results</h1>
+        <p class="text-secondary">Security insights from uploaded logs</p>
+      </div>
+      <div class="card p-3 mb-4 text-center">
+        <h5>
+          Total Alerts: {{ alerts|length }} | Anomalies: {{ anomalies|length }}
+        </h5>
+      </div>
+
+      <div class="row g-4">
+        <!-- Alerts -->
+        <div class="col-md-6">
+          <div class="card p-4 shadow">
+            <h4 class="mb-3">🚨 Alerts</h4>
+
+            {% if alerts %} {% for alert in alerts %}
+            <div class="alert-box">{{ alert }}</div>
+            {% endfor %} {% else %}
+            <p class="no-data">No alerts detected ✅</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- AI Anomalies -->
+        <div class="col-md-6">
+          <div class="card p-4 shadow">
+            <h4 class="mb-3">🤖 AI Anomalies</h4>
+
+            {% if anomalies %} {% for a in anomalies %}
+            <div class="anomaly-box">{{ a }}</div>
+            {% endfor %} {% else %}
+            <p class="no-data">No anomalies detected ✅</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Back Button -->
+      <div class="text-center mt-5">
+        <a href="/" class="btn btn-back px-4 py-2"> ⬅ Upload Another File </a>
+      </div>
+    </div>
+  </body>
+</html>

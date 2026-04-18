@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Log Analyzer</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom Styling -->
+    <style>
+      body {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: white;
+        min-height: 100vh;
+      }
+
+      .card {
+        background-color: #ffffff;
+        border: none;
+        border-radius: 15px;
+      }
+
+      .btn-custom {
+        background: #22c55e;
+        border: none;
+      }
+
+      .btn-custom:hover {
+        background: #16a34a;
+      }
+
+      .upload-box {
+        border: 2px dashed #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .upload-box:hover {
+        border-color: #22c55e;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      class="container d-flex justify-content-center align-items-center"
+      style="min-height: 100vh"
+    >
+      <div class="card p-5 shadow-lg text-center" style="width: 500px">
+        <h1 class="mb-3">🔍 AI Log Analyzer</h1>
+        <p class="text-secondary mb-4">
+          Upload your log file to detect anomalies and security threats
+        </p>
+
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+            <label class="upload-box w-100 mb-3">
+              <span id="file-name">📂 Click to upload log file</span>
+              <input
+                type="file"
+                name="logfile"
+                id="file-input"
+                hidden
+                required
+              />
+            </label>
+
+            <script>
+              const input = document.getElementById("file-input");
+              const fileName = document.getElementById("file-name");
+
+              input.addEventListener("change", function () {
+                fileName.textContent = "📄 " + input.files[0].name;
+              });
+            </script>
+          </label>
+
+          <button type="submit" class="btn btn-custom w-100">
+            🚀 Analyze Logs
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
